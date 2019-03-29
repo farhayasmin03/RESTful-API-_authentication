@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 // Setup schema
-var contactSchema = mongoose.Schema({
+var contactSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -9,12 +9,28 @@ var contactSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    gender: String,
-    phone: String,
-    create_date: {
-        type: Date,
-        default: Date.now
+   
+    contact: {
+        type: String,
+        required: true
     }
+    
 });
 // Export Contact model
-var Contact = module.exports = mongoose.model('contact', contactSchema);
+var User=mongoose.model('User',contactSchema);
+module.exports=User;
+
+//Find user by id
+module.exports.getUserById=function(id,callback){
+    User.findById(id,callback);
+}
+//Find users by name
+module.exports.getUserByName=function(id,callback){
+    const query={
+        Name:name
+    }
+    User.findOne(query,callback);
+}
+module.exports.addUser = function (newUser, callback) {
+    console.log("Added user")
+}
